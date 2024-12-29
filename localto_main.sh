@@ -15,7 +15,7 @@ main_menu() {
     do
       case $opt in
         "Instalar Localto")
-          bash "Install_localto.sh"
+          bash "localto_install.sh"
           ;;
         "Salir y limpiar")
           echo_formatted "Regresando..."
