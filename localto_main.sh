@@ -1,14 +1,14 @@
-!/bin/bash
+#!/bin/bash
 
 # Función para mostrar mensajes con formato
 echo_formatted() {
   echo -e "\033[1;32m$1\033[0m"
 }
 
-# Función principal para el menú
-main_menu() {
+# Menú de Localto
+localto_menu() {
   while true; do
-    echo_formatted "\nMenú de ejecución:"
+    echo_formatted "\nMenú de Localto:"
     PS3="Elige tu opción: "
     opciones=("Instalar Localto" "Regresar")
     select opt in "${opciones[@]}"
@@ -17,7 +17,7 @@ main_menu() {
         "Instalar Localto")
           bash "./localto_install.sh"
           ;;
-        "Salir y limpiar")
+        "Regresar")
           echo_formatted "Regresando al menú principal..."
           return # Regresar al menú principal
           ;;
@@ -28,5 +28,6 @@ main_menu() {
     done
   done
 }
-# Llamar al menú principal
-main_menu
+
+# Llamar al menú de Localto
+localto_menu
