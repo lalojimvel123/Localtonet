@@ -14,8 +14,7 @@ fi
 # Definir la carpeta donde están los archivos de Localtonet
 CURRENT_DIR=$(pwd)
 PARENT_DIR=$(dirname "$CURRENT_DIR")
-GRANDPARENT_DIR=$(dirname "$PARENT_DIR")
-LOCALTONET_DIR="$GRANDPARENT_DIR/localtonet"
+LOCALTONET_DIR="$PARENT_DIR/t"
 
 # Detener el servicio
 stop_service() {
