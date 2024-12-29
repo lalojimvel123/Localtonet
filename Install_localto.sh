@@ -41,8 +41,8 @@ rm -f localtonet.zip
 echo "Localtonet descargado y configurado."
 
 # Ejecutar main.sh desde el mismo directorio
-echo "Ejecutando main.sh..."
-if ! bash main.sh; then
-  echo "Error al ejecutar main.sh."
-  exit 1
-fi
+#echo "Ejecutando main.sh..."
+#if ! bash main.sh; then
+  #echo "Error al ejecutar main.sh."
+  #exit 1
+#fi
