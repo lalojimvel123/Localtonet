@@ -14,7 +14,7 @@ fi
 # Definir la carpeta donde están los archivos de Localtonet
 CURRENT_DIR=$(pwd)
 PARENT_DIR=$(dirname "$CURRENT_DIR")
-LOCALTONET_DIR="$PARENT_DIR/t"
+LOCALTONET_DIR="$PARENT_DIR/localtonet"
 
 # Detener el servicio
 stop_service() {
@@ -59,7 +59,7 @@ reload_systemd() {
 
 # Eliminar archivos relacionados con Localtonet
 remove_localtonet_files() {
-  if [ -d "$LOCALTONET_DIR" ]; then
+  if [ -f "$LOCALTONET_DIR" ]; then
     echo_formatted "\n¿Deseas eliminar los archivos de Localtonet ubicados en $LOCALTONET_DIR? [s/n]"
     read -r respuesta
     case "$respuesta" in
