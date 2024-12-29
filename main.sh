@@ -14,7 +14,10 @@ clean_up() {
   rm -rf "$current_dir"
   echo_formatted "Directorio eliminado."
 }
-
+# Descarga del programa
+Dowload(){
+  bash "Download.sh"
+}
 # Función principal para el menú
 main_menu() {
   while true; do
@@ -49,6 +52,6 @@ main_menu() {
   done
 }
 #Descarga los archivos necesarios
-sudo apt update && sudo apt upgrade -y
+Dowload
 # Llamar al menú principal
 main_menu
