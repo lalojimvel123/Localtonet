@@ -28,13 +28,13 @@ main_menu() {
     do
       case $opt in
         "Configurar Localto")
-          bash "localto_main.sh"
+          bash "./localto_main.sh"
           ;;
         "Configurar Servicio")
-          bash "Port_config.sh"
+          bash "./Port_config.sh"
           ;;
         "Desinstalar Localto")
-          bash "Token_config.sh"
+          bash "./Token_config.sh"
           ;;
         "Salir y limpiar")
           echo_formatted "Saliendo del menú y limpiando..."
