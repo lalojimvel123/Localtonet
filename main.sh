@@ -1,78 +1,62 @@
 #!/bin/bash
 
-# Localtonet Installer Script for ARM64
-# Ejecuta este script con: 
-# wget -O - https://raw.githubusercontent.com/lalojimvel123/Localto/main/main.sh | sudo bash
+# Función para mostrar mensajes con formato
+echo_formatted() {
+  echo -e "\033[1;32m$1\033[0m"
+}
 
-set -e
+# Función para descargar y ejecutar scripts
+download_and_run() {
+  local script_name="$1"
+  local script_url="URL_BASE/${script_name}"  # Ajusta 'URL_BASE' a tu repositorio de GitHub o URL donde se encuentran los scripts
 
-# Variables
-LOCALTONET_URL="https://localtonet.com/download/localtonet-linux-arm64.zip"
-INSTALL_DIR="/usr/local/bin"
-CONFIG_DIR="/etc/localtonet"
-SERVICE_FILE="/etc/systemd/system/localtonet.service"
+  echo_formatted "Descargando y ejecutando $script_name..."
+  
+  if ! wget -q "$script_url" -O "/tmp/$script_name"; then
+    echo_formatted "Error al descargar $script_name. Verifica la URL y tu conexión a Internet."
+    return 1
+  fi
 
-echo "=== Instalación de Localtonet para ARM64 ==="
+  chmod +x "/tmp/$script_name"
+  if ! "/tmp/$script_name"; then
+    echo_formatted "Error al ejecutar $script_name."
+  fi
+  
+  rm -f "/tmp/$script_name"  # Limpiar el archivo descargado después de su uso
+}
 
-# Verificar arquitectura del sistema
-ARCH=$(uname -m)
-if [[ "$ARCH" != "aarch64" ]]; then
-    echo "Error: Este script solo es compatible con arquitecturas ARM64 (aarch64)."
-    exit 1
-fi
+# Función principal para el menú
+main_menu() {
+  while true; do
+    echo_formatted "\nMenú de ejecución:"
+    PS3="Elige tu opción: "
+    opciones=("Instalar Localto" "Configurar puertos" "Configurar Token" "Desinstalar Localto" "Salir")
+    select opt in "${opciones[@]}"
+    do
+      case $opt in
+        "Instalar Localto")
+          download_and_run "Install_localto.sh"
+          ;;
+        "Configurar puertos")
+          download_and_run "Port_config.sh"
+          ;;
+        "Configurar Token")
+          download_and_run "Token_config.sh"
+          ;;
+        "Desinstalar Localto")
+          download_and_run "Uninstall_Localto.sh"
+          ;;
+        "Salir")
+          echo_formatted "Saliendo del menú."
+          return
+          ;;
+        *) echo_formatted "Opción no válida."
+          ;;
+      esac
+      break
+    done
+  done
+}
 
-# Crear directorios necesarios
-echo "Creando directorios de configuración..."
-mkdir -p $CONFIG_DIR
-chmod 755 $CONFIG_DIR
-
-# Descargar y extraer Localtonet
-echo "Descargando Localtonet..."
-wget -q $LOCALTONET_URL -O /tmp/localtonet.zip
-unzip -o /tmp/localtonet.zip -d /tmp/
-
-echo "Instalando binario en $INSTALL_DIR..."
-mv /tmp/localtonet $INSTALL_DIR/
-chmod +x $INSTALL_DIR/localtonet
-
-# Crear archivo de configuración
-if [ ! -f "$CONFIG_DIR/config.env" ]; then
-    echo "Creando archivo de configuración..."
-    cat <<EOL > $CONFIG_DIR/config.env
-AUTH_TOKEN=tu_token_aqui
-TUNNELS="127.0.0.1:8080"
-EOL
-    chmod 600 $CONFIG_DIR/config.env
-else
-    echo "Archivo de configuración ya existe en $CONFIG_DIR/config.env"
-fi
-
-# Crear servicio systemd
-echo "Configurando servicio systemd..."
-cat <<EOL > $SERVICE_FILE
-[Unit]
-Description=Localtonet Tunnel Service
-After=network.target
-
-[Service]
-Type=simple
-EnvironmentFile=$CONFIG_DIR/config.env
-ExecStart=$INSTALL_DIR/localtonet authtoken \$AUTH_TOKEN \$TUNNELS
-Restart=always
-
-[Install]
-WantedBy=multi-user.target
-EOL
-
-# Recargar systemd y habilitar el servicio
-echo "Habilitando servicio Localtonet..."
-systemctl daemon-reload
-systemctl enable localtonet
-
-echo "=== Instalación completada con éxito ==="
-echo "1. Edita el archivo de configuración para agregar tu token y puertos:"
-echo "   sudo nano $CONFIG_DIR/config.env"
-echo "2. Inicia el servicio con:"
-echo "   sudo systemctl start localtonet"
-echo "3. Verifica el estado del servicio con:"
-echo "   sudo systemctl status localtonet"
+# Llamar al menú principal
+main_menu
