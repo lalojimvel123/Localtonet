@@ -41,7 +41,7 @@ main_menu() {
           ;;
         "Salir y limpiar")
           echo_formatted "Saliendo del menú y limpiando..."
-          clean_up
+          #clean_up
           exit 0
           ;;
         *) echo_formatted "Opción no válida."
