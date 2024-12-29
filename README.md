@@ -16,7 +16,7 @@ Localtonet en una Raspberry Pi o cualquier sistema basado en Linux con arquitect
    
    ```bash
    #wget -O - https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install.sh | sudo bash
-   git clone https://github.com/lalojimvel123/Linux-System-Scripts.git
-   cd ./Linux-System-Scripts/
+   git clone https://github.com/lalojimvel123/Localtonet.git
+   cd ./Localtonet/
    bash main.sh
    ```
