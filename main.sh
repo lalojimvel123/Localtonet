@@ -23,21 +23,18 @@ main_menu() {
   while true; do
     echo_formatted "\nMenú de ejecución:"
     PS3="Elige tu opción: "
-    opciones=("Instalar Localto" "Configurar puertos" "Configurar Token" "Desinstalar Localto" "Salir y limpiar")
+    opciones=("Configurar Localto" "Configurar Servicio" "Desinstalar Localto" "Salir y limpiar")
     select opt in "${opciones[@]}"
     do
       case $opt in
-        "Instalar Localto")
+        "Configurar Localto")
           bash "Install_localto.sh"
           ;;
-        "Configurar puertos")
+        "Configurar Servicio")
           bash "Port_config.sh"
           ;;
-        "Configurar Token")
-          bash "Token_config.sh"
-          ;;
         "Desinstalar Localto")
-          bash "Uninstall_Localto.sh"
+          bash "Token_config.sh"
           ;;
         "Salir y limpiar")
           echo_formatted "Saliendo del menú y limpiando..."
