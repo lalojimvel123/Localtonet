@@ -60,9 +60,21 @@ reload_systemd() {
 # Eliminar archivos relacionados con Localtonet
 remove_localtonet_files() {
   if [ -d "$LOCALTONET_DIR" ]; then
-    echo_formatted "Eliminando archivos de Localtonet en $LOCALTONET_DIR..."
-    rm -rf "$LOCALTONET_DIR"
-    echo_formatted "Archivos de Localtonet eliminados."
+    echo_formatted "\n¿Deseas eliminar los archivos de Localtonet ubicados en $LOCALTONET_DIR? [s/n]"
+    read -r respuesta
+    case "$respuesta" in
+      s|S)
+        echo_formatted "Eliminando archivos de Localtonet..."
+        rm -rf "$LOCALTONET_DIR"
+        echo_formatted "Archivos de Localtonet eliminados."
+        ;;
+      n|N)
+        echo_formatted "Archivos de Localtonet conservados."
+        ;;
+      *)
+        echo_formatted "Opción no válida. Conservando los archivos de Localtonet."
+        ;;
+    esac
   else
     echo_formatted "No se encontraron archivos de Localtonet en $LOCALTONET_DIR."
   fi
@@ -75,4 +87,4 @@ remove_service_file
 reload_systemd
 remove_localtonet_files
 
-echo_formatted "El servicio Localtonet y sus archivos asociados han sido eliminados."
+echo_formatted "El servicio Localtonet ha sido eliminado."
