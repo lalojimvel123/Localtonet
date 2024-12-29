@@ -50,7 +50,11 @@ enable_and_start_service() {
 # Estado del servicio
 check_service_status() {
   echo_formatted "Estado del servicio Localtonet:"
-  systemctl status localtonet.service
+  if systemctl is-active --quiet localtonet.service; then
+    echo_formatted "El servicio está activo y funcionando correctamente."
+  else
+    echo_formatted "El servicio no está activo. Verifique con: sudo systemctl status localtonet.service"
+  fi
 }
 
 # Ejecutar las funciones
