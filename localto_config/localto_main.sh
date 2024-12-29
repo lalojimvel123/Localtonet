@@ -18,8 +18,8 @@ main_menu() {
           bash "Install_localto.sh"
           ;;
         "Salir y limpiar")
-          echo_formatted "Saliendo del menú y limpiando..."
-          clean_up
+          echo_formatted "Regresando..."
+          bash ./main.sh
           exit 0
           ;;
         *) echo_formatted "Opción no válida."
@@ -29,7 +29,5 @@ main_menu() {
     done
   done
 }
-#Descarga los archivos necesarios
-Dowload
 # Llamar al menú principal
 main_menu
