@@ -1,4 +1,3 @@
-
 #!/bin/bash
 
 # Función para mostrar mensajes con formato
@@ -15,7 +14,7 @@ service_menu() {
     select opt in "${opciones[@]}"
     do
       case $opt in
-        "Instalar Localto")
+        "Crear servicio Localto")
           bash "./service_localto_create.sh"
           ;;
         "Regresar")
