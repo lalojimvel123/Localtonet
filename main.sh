@@ -28,7 +28,7 @@ main_menu() {
     do
       case $opt in
         "Configurar Localto")
-          bash "localto_config/localto_main.sh"
+          bash "localto_main.sh"
           ;;
         "Configurar Servicio")
           bash "Port_config.sh"
