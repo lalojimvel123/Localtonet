@@ -20,3 +20,7 @@ Localtonet en una Raspberry Pi o cualquier sistema basado en Linux con arquitect
    cd ./Localtonet/
    bash main.sh
    ```
+   ```bash
+   sudo rm -R Localtonet
+   ```
+
