@@ -31,7 +31,7 @@ main_menu() {
           bash "./localto_main.sh"
           ;;
         "Configurar Servicio")
-          bash "./Port_config.sh"
+          bash "./service_main.sh"
           ;;
         "Desinstalar Localto")
           bash "./Token_config.sh"
