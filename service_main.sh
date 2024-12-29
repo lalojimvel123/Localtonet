@@ -10,7 +10,7 @@ service_menu() {
   while true; do
     echo_formatted "\nMenú de servicio:"
     PS3="Elige tu opción: "
-    opciones=("Crear servicio Localto" "Borrar servicio Localto" "Regresar")
+    opciones=("Crear servicio Localto" "Borrar servicio Localto" "Revisar status del servicio" "Regresar")
     select opt in "${opciones[@]}"
     do
       case $opt in
@@ -19,6 +19,9 @@ service_menu() {
           ;;
         "Borrar servicio Localto")
           bash "./service_localto_remove.sh"
+          ;;
+        "Revisar status del servicio")
+          bash "./service_localto_status.sh"
           ;;
         "Regresar")
           echo_formatted "Regresando al menú principal..."
