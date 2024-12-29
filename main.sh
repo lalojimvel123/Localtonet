@@ -48,6 +48,7 @@ main_menu() {
     done
   done
 }
-
+#Descarga los archivos necesarios
+sudo apt update && sudo apt upgrade -y
 # Llamar al menú principal
 main_menu
