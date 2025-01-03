@@ -1,9 +1,9 @@
 #!/bin/sh
 
-# Actualización del sistema (Alpine usa apk en lugar de apt)
+# Actualización del sistema
 apk update && apk upgrade
 
-# Instala wget y unzip para manejar el descargado y descompresion
+# Instala wget y unzip
 apk add --no-cache wget unzip
 
 # Descargar zip de localto
@@ -20,4 +20,3 @@ chmod +x localtonet
 
 # Ejecuta aplicacion - Aquí es donde necesitas automatizar el token
 echo "$LOCALTO_TOKEN" | ./localtonet
-
