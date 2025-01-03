@@ -1,6 +1,6 @@
-nombre de la imagen
+nombre de la imagen para ubuntu
 ```bash
-localtonet/localto_app
+localtonet/localto_app:ubuntu
 ```
 contenido de la imagen ubuntu:20.04
 ```bash
@@ -22,37 +22,41 @@ RUN wget -O localtonet-linux-x64.zip "https://localtonet.com/download/localtonet
 # Asegurarse de que localtonet es ejecutable
 RUN chmod +x /app/localtonet
 
-# Descargar el script `start.sh` desde GitHub
-RUN wget -O /app/start_ubuntu.sh "[https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install_docker/start.sh](https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install_docker/start_ubuntu.sh)" && \
+# Descargar el script `start_ubuntu.sh` desde GitHub
+RUN wget -O /app/start_ubuntu.sh "https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install_docker/start_ubuntu.sh" && \
     chmod +x /app/start_ubuntu.sh
 
 # Establecer el script como punto de entrada
 CMD ["/app/start_ubuntu.sh"]
 
 ```
-
+nombre de la imagen para alpine
+```bash
+localtonet/localto_app:alpine
+```
 contenido de la imagen alpine
 ```bash
-    FROM alpine:latest
-    
-    # Instala las herramientas necesarias
-    RUN apk add --no-cache bash wget unzip
-    
-    # Crea el directorio app si no existe
-    RUN mkdir -p /app
-    
-    # Descarga y extrae Localtonet para Alpine Linux (musl 64)
-    WORKDIR /app
-    RUN wget -O localtonet-linux-musl-x64.zip "https://localtonet.com/download/localtonet-linux-musl-x64.zip" && \
-        unzip localtonet-linux-musl-x64.zip && \
-        rm localtonet-linux-musl-x64.zip
-    
-    # Asegúrate de que localtonet es ejecutable
-    RUN chmod +x /app/localtonet
-    
-    # Establece el directorio de trabajo
-    WORKDIR /app
-    
-    # Ejecuta localtonet al iniciar el contenedor, pasando el token
-    CMD ["sh", "-c", "./localtonet $LOCALTO_TOKEN"]
+FROM alpine:latest
+
+# Instalar dependencias necesarias
+RUN apk add --no-cache bash wget unzip libc6-compat expect
+
+# Crear el directorio de trabajo
+WORKDIR /app
+
+# Descargar y extraer Localtonet (versión Alpine Linux)
+RUN wget -O localtonet-linux-musl-x64.zip "https://localtonet.com/download/localtonet-linux-musl-x64.zip" && \
+    unzip localtonet-linux-musl-x64.zip && \
+    rm localtonet-linux-musl-x64.zip
+
+# Asegurar que Localtonet sea ejecutable
+RUN chmod +x /app/localtonet
+
+# Descargar el script `start_alpine.sh` desde GitHub
+RUN wget -O /app/start_alpine.sh "https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install_docker/start_alpine.sh" && \
+    chmod +x /app/start_alpine.sh
+
+# Establecer el script como punto de entrada
+CMD ["/app/start_alpine.sh"]
+
 ```
