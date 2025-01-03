@@ -1,7 +1,7 @@
 configuracion de contenedor
 ````
 services:
-  localto-app:
+  localto_app:
     image: localtonet/localto_app:latest  # Ajusta el nombre y la etiqueta según corresponda
     networks:
       - mi-red-localto
