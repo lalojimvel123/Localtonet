@@ -1,13 +1,21 @@
-#!/bin/bash
+#!/usr/bin/expect
+
+set timeout -1
 
 # Verificar si el token está definido
-if [ -z "$LOCALTO_TOKEN" ]; then
-  echo "Error: LOCALTO_TOKEN no está definido."
-  exit 1
-fi
+if {![info exists env(LOCALTO_TOKEN)]} {
+    send_user "Error: LOCALTO_TOKEN no está definido.\n"
+    exit 1
+}
 
-# Ejecutar localtonet con el token como argumento
-/app/localtonet $LOCALTO_TOKEN
+# Ejecutar localtonet
+spawn /app/localtonet
+
+# Esperar a que el programa solicite el token
+expect "Please enter your token:"
+
+# Enviar el token
+send "$env(LOCALTO_TOKEN)\r"
 
 # Mantener el contenedor activo en caso de que localtonet termine
-tail -f /dev/null
+interact
