@@ -1,0 +1,34 @@
+version: '3'
+services:
+  localto:
+    build:
+      context: .
+      dockerfile: |
+        FROM alpine:latest
+        RUN apk add --no-cache bash wget
+        RUN wget -O /app/localto.sh "URL_DE_TU_SCRIPTO_LOCALTO"
+        RUN chmod +x /app/localto.sh
+        WORKDIR /app
+        CMD ["/app/localto.sh"]
+    networks:
+      - mi-red-localto
+    ports:
+      - "8080:8080" # Localto expone el puerto 8080
+
+  servicio1:
+    image: alguna_imagen_servicio1
+    networks:
+      - mi-red-localto
+    ports:
+      - "80:80" # Servicio1 expone el puerto 80
+
+  servicio2:
+    image: alguna_imagen_servicio2
+    networks:
+      - mi-red-localto
+    ports:
+      - "443:443" # Servicio2 expone el puerto 443
+
+networks:
+  mi-red-localto:
+    external: false
