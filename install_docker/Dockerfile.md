@@ -14,7 +14,7 @@ contenido de la imagen
     
     # Descarga y extrae Localtonet para Alpine Linux (musl 64)
     WORKDIR /app
-    RUN wget -O localtonet-alpine-musl64.zip "https://localtonet.com/download/localtonet-linux-musl-x64.zip" && \
+    RUN wget -O localtonet-linux-musl-x64.zip "https://localtonet.com/download/localtonet-linux-musl-x64.zip" && \
         unzip localtonet-linux-musl-x64.zip && \
         rm localtonet-linux-musl-x64.zip
     
