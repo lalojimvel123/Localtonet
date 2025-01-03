@@ -3,6 +3,9 @@ FROM alpine:latest
 # Instala las herramientas necesarias
 RUN apk add --no-cache bash wget
 
+# Crea el directorio app si no existe
+RUN mkdir -p /app
+
 # Descarga el script desde GitHub
 RUN wget -O /app/localto_installl.sh "https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install_docker/localto_installl.sh"
 
