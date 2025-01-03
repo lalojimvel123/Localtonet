@@ -1,6 +1,8 @@
+nombre de la imagen
 ```bash
 localtonet/localto_app
 ```
+contenido de la imagen
 ```bash
     FROM alpine:latest
     
