@@ -18,5 +18,8 @@ expect "Please enter your token:"
 # Enviar el token automáticamente
 send "$env(LOCALTO_TOKEN)\r"
 
-# Mantener la sesión interactiva para que no se cierre
-interact
+# Esperar a que localtonet termine (esto puede depender de cómo localtonet termine su ejecución)
+expect eof
+
+# Salir correctamente del script
+exit 0
