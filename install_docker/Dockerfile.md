@@ -36,7 +36,7 @@ localtonet/localto_app:debian_slim
 ```
 contenido de la imagen debian_slim
 ```bash
-FROM debian:slim
+FROM debian:bookworm-slim
 
 # Instalar herramientas necesarias
 RUN apt-get update && apt-get install -y wget unzip expect libc6 libstdc++6 libgcc1 libicu-dev libssl-dev libkrb5-3 zlib1g && \
@@ -60,6 +60,4 @@ RUN wget -O /app/start_debian.sh "https://raw.githubusercontent.com/lalojimvel12
 
 # Establecer el script como punto de entrada
 CMD ["/app/start_debian.sh"]
-
-
 ```
