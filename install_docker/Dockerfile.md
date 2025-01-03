@@ -36,27 +36,30 @@ localtonet/localto_app:debian_slim
 ```
 contenido de la imagen debian_slim
 ```bash
-FROM alpine:latest
+FROM debian:slim
 
-# Instalar dependencias necesarias
-RUN apk add --no-cache bash wget unzip libc6-compat expect
+# Instalar herramientas necesarias
+RUN apt-get update && apt-get install -y wget unzip expect libc6 libstdc++6 libgcc1 libicu-dev libssl-dev libkrb5-3 zlib1g && \
+    rm -rf /var/lib/apt/lists/*
 
-# Crear el directorio de trabajo
+# Crear el directorio app
+RUN mkdir -p /app
+
+# Descargar y extraer Localtonet
 WORKDIR /app
+RUN wget -O localtonet-linux-x64.zip "https://localtonet.com/download/localtonet-linux-x64.zip" && \
+    unzip localtonet-linux-x64.zip && \
+    rm localtonet-linux-x64.zip
 
-# Descargar y extraer Localtonet (versión Alpine Linux)
-RUN wget -O localtonet-linux-musl-x64.zip "https://localtonet.com/download/localtonet-linux-musl-x64.zip" && \
-    unzip localtonet-linux-musl-x64.zip && \
-    rm localtonet-linux-musl-x64.zip
-
-# Asegurar que Localtonet sea ejecutable
+# Asegurarse de que localtonet es ejecutable
 RUN chmod +x /app/localtonet
 
-# Descargar el script `start_alpine.sh` desde GitHub
-RUN wget -O /app/start_alpine.sh "https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install_docker/start_alpine.sh" && \
-    chmod +x /app/start_alpine.sh
+# Descargar el script `start_debian.sh` desde GitHub
+RUN wget -O /app/start_debian.sh "https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install_docker/install/start_debian.sh" && \
+    chmod +x /app/start_debian.sh
 
 # Establecer el script como punto de entrada
-CMD ["/app/start_alpine.sh"]
+CMD ["/app/start_debian.sh"]
+
 
 ```
