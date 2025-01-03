@@ -6,8 +6,8 @@ if [ -z "$LOCALTO_TOKEN" ]; then
   exit 1
 fi
 
-# Pasar el token automáticamente al programa
-echo "$LOCALTO_TOKEN" | ./localtonet
+# Ejecutar localtonet con el token como argumento
+/app/localtonet $LOCALTO_TOKEN
 
 # Mantener el contenedor activo en caso de que localtonet termine
 tail -f /dev/null
