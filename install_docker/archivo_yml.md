@@ -9,7 +9,7 @@ services:
       - LOCALTO_TOKEN=dfLK0tRiWh5H4SewyXN9oFT1runZDk8zB
 networks:
   mi-red-localto:
-    external: true
+    external: false
 ````
 external: true
 Significado: Cuando especificas external: true para una red en Docker Compose, estás indicando que la red ya existe en el sistema Docker y no debe ser creada por Docker Compose. La red debe estar previamente creada fuera de esta configuración, ya sea manualmente mediante el comando docker network create o por otro servicio o configuración.
