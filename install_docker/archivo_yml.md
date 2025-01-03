@@ -12,7 +12,7 @@ services:
     networks:
       - mi-red-localto
     environment:
-      - LOCALTO_TOKEN=dfLK0tRiWh5H4SewyXN9oFT1runZDk8zB  # Token de Localtonet
+      - LOCALTO_TOKEN=<token>  # Token de Localtonet
     restart: unless-stopped  # Reinicia automáticamente si falla
     stdin_open: true  # Mantiene la entrada estándar abierta
     tty: true          # Emula un terminal para evitar problemas con TTY
