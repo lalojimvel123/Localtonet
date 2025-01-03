@@ -1,3 +1,7 @@
+Nombre del contenedor
+```bash
+localto_app
+```
 configuracion de contenedor
 ````
 version: "3.8"  # Especifica la versión de Compose
