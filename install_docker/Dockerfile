@@ -1,6 +1,16 @@
 FROM alpine:latest
-RUN apk add --no-cache wget unzip
-COPY localto.sh /app/localto.sh
+
+# Instala las herramientas necesarias para descargar y ejecutar el script
+RUN apk add --no-cache bash wget
+
+# Descarga el script desde GitHub
+RUN wget -O /app/localto.sh "https://github.com/lalojimvel123/Localtonet/blob/aee4520762222b555649488c5ae4130fc4847476/install_docker/localto_installl.sh"
+
+# Asegúrate de que el script es ejecutable
 RUN chmod +x /app/localto.sh
+
+# Establece el directorio de trabajo
 WORKDIR /app
+
+# Ejecuta el script al iniciar el contenedor
 CMD ["/app/localto.sh"]
