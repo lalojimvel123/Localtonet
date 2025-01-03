@@ -6,7 +6,8 @@ services:
     networks:
       - mi-red-localto
     environment:
-      - LOCALTO_TOKEN=dfLK0tRiWh5H4SewyXN9oFT1runZDk8zB
+      - LOCALTO_TOKEN=dfLK0tRiWh5H4SewyXN9oFT1runZDk8zB  # Tu token de Localtonet
+    restart: unless-stopped  # Para que se reinicie automáticamente en caso de error
 networks:
   mi-red-localto:
     external: false
