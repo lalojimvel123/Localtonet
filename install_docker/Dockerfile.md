@@ -30,11 +30,11 @@ RUN wget -O /app/start_ubuntu.sh "https://raw.githubusercontent.com/lalojimvel12
 CMD ["/app/start_ubuntu.sh"]
 
 ```
-nombre de la imagen para alpine
+nombre de la imagen para debian slim
 ```bash
-localtonet/localto_app:alpine
+localtonet/localto_app:debian_slim
 ```
-contenido de la imagen alpine
+contenido de la imagen debian_slim
 ```bash
 FROM alpine:latest
 
