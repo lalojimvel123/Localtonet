@@ -20,3 +20,6 @@ services:
 
         # Ejecuta el script al iniciar el contenedor
         CMD ["/app/localto.sh"]
+  networks:
+      - mi-red-localto
+          external: true
