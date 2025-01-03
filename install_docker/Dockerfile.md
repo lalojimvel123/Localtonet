@@ -23,7 +23,7 @@ RUN wget -O localtonet-linux-x64.zip "https://localtonet.com/download/localtonet
 RUN chmod +x /app/localtonet
 
 # Descargar el script `start_ubuntu.sh` desde GitHub
-RUN wget -O /app/start_ubuntu.sh "https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install_docker/start_ubuntu.sh" && \
+RUN wget -O /app/start_ubuntu.sh "https://raw.githubusercontent.com/lalojimvel123/Localtonet/refs/heads/main/install_docker/install/start_ubuntu.sh" && \
     chmod +x /app/start_ubuntu.sh
 
 # Establecer el script como punto de entrada
