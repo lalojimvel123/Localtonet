@@ -1,3 +1,7 @@
+```bash
+localtonet/localto_app
+```
+``bash
 FROM alpine:latest
 
 # Instala las herramientas necesarias
@@ -20,3 +24,4 @@ WORKDIR /app
 
 # Ejecuta localtonet al iniciar el contenedor, pasando el token
 CMD ["sh", "-c", "echo \"$LOCALTO_TOKEN\" | ./localtonet"]
+``
