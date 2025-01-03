@@ -19,4 +19,5 @@ rm -f localtonet-linux-arm64.zip
 chmod +x localtonet
 
 # Ejecuta aplicacion - Aquí es donde necesitas automatizar el token
-echo "TU_TOKEN_AQUI" | ./localtonet
+echo "$LOCALTO_TOKEN" | ./localtonet
+
