@@ -1,25 +1,36 @@
-#!/usr/bin/expect
+#!/bin/bash
 
 # Verificar si el token está definido
-if {![info exists env(LOCALTO_TOKEN)]} {
-    send_user "Error: LOCALTO_TOKEN no está definido.\n"
-    exit 1
-}
+if [ -z "$LOCALTO_TOKEN" ]; then
+  echo "Error: LOCALTO_TOKEN no está definido."
+  exit 1
+fi
 
 # Mostrar el token para depuración
-send_user "Token recibido: $env(LOCALTO_TOKEN)\n"
+echo "Token recibido: $LOCALTO_TOKEN"
 
-# Ejecutar localtonet
-spawn /app/localtonet
+# Bucle infinito para ejecutar y reiniciar localtonet
+while true; do
+  # Ejecutar localtonet
+  echo "Ejecutando LocalToNet..."
+  /app/localtonet &  # Ejecutar en segundo plano
 
-# Esperar la solicitud de token
-expect "Please enter your token:"
+  # Esperar 3 segundos para que localtonet inicie
+  sleep 3
 
-# Enviar el token automáticamente
-send "$env(LOCALTO_TOKEN)\r"
+  # Enviar el token usando `expect`
+  echo "Enviando el token..."
+  expect -c "
+    spawn /app/localtonet
+    expect \"Please enter your token:\"
+    send \"$LOCALTO_TOKEN\r\"
+    interact
+  "
 
-# Esperar a que localtonet termine (esto puede depender de cómo localtonet termine su ejecución)
-expect eof
+  # Esperar que localtonet termine
+  wait $!
 
-# Salir correctamente del script
-exit 0
+  # Si localtonet termina por alguna razón, reiniciamos el programa
+  echo "localtonet terminó, reiniciando..."
+  sleep 3  # Esperamos 3 segundos antes de reiniciar el programa
+done
