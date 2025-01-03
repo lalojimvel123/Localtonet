@@ -12,11 +12,11 @@ contenido de la imagen
     # Crea el directorio app si no existe
     RUN mkdir -p /app
     
-    # Descarga y extrae Localtonet
+    # Descarga y extrae Localtonet para Alpine Linux (musl 64)
     WORKDIR /app
-    RUN wget -O localtonet-linux-arm64.zip "https://localtonet.com/download/localtonet-linux-arm64.zip" && \
-        unzip localtonet-linux-arm64.zip && \
-        rm localtonet-linux-arm64.zip
+    RUN wget -O localtonet-alpine-musl64.zip "https://localtonet.com/download/localtonet-linux-musl-x64.zip" && \
+        unzip localtonet-linux-musl-x64.zip && \
+        rm localtonet-linux-musl-x64.zip
     
     # Asegúrate de que localtonet es ejecutable
     RUN chmod +x /app/localtonet
@@ -25,5 +25,5 @@ contenido de la imagen
     WORKDIR /app
     
     # Ejecuta localtonet al iniciar el contenedor, pasando el token
-    CMD ["sh", "-c", "echo \"$LOCALTO_TOKEN\" | ./localtonet"]
+    CMD ["sh", "-c", "./localtonet $LOCALTO_TOKEN"]
 ```
