@@ -1,4 +1,3 @@
-version: '3'
 services:
   localto-app:
     build:
@@ -20,6 +19,9 @@ services:
 
         # Ejecuta el script al iniciar el contenedor
         CMD ["/app/localto.sh"]
-  networks:
+    networks:
       - mi-red-localto
-          external: true
+
+networks:
+  mi-red-localto:
+    external: false
